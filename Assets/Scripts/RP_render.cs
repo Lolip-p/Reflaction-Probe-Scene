@@ -5,6 +5,7 @@ using UnityEngine;
 public class RP_render : MonoBehaviour
 {
     [SerializeField] private float gorizont = 0;
+    [SerializeField] private float dist = 0.1f;
 
     private ReflectionProbe RP;
 
@@ -20,9 +21,9 @@ public class RP_render : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            RP.transform.position = hit.point + new Vector3(0, 0.05f ,0);
+            RP.transform.position = hit.point + new Vector3(0, dist, 0);
 
-            if (RP.transform.position.y + transform.position.y + 0.1f <= gorizont)
+            if (RP.transform.position.y + transform.position.y + dist + 0.05f <= gorizont)
             {
                 if (transform.position.y <= gorizont)
                 {
@@ -30,7 +31,7 @@ public class RP_render : MonoBehaviour
                 }
                 else
                 {
-                    RP.transform.position = new Vector3(RP.transform.position.x, hit.point.y - hit.point.y + 0.1f, RP.transform.position.z);
+                    RP.transform.position = new Vector3(RP.transform.position.x, hit.point.y - hit.point.y + dist, RP.transform.position.z);
                 }
             }
         }
