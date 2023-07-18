@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RP_render : MonoBehaviour
 {
     [SerializeField] private float gorizont = 0;
     [SerializeField] private float dist = 0.1f;
+
+    private bool bo = false;
+    private bool rpo = false;
 
     private ReflectionProbe RP;
 
@@ -34,6 +38,33 @@ public class RP_render : MonoBehaviour
                     RP.transform.position = new Vector3(RP.transform.position.x, hit.point.y - hit.point.y + dist, RP.transform.position.z);
                 }
             }
+        }
+    }
+
+    public void xBounds()
+    {
+        if (bo)
+        {
+            RenderSettings.reflectionBounces = 2;
+            bo = false;
+        }
+        else
+        {
+            RenderSettings.reflectionBounces = 1;
+            bo = true;
+        }
+    }
+    public void xSize()
+    {
+        if (rpo)
+        {
+            RP.resolution = 1024;
+            rpo = false;
+        }
+        else
+        {
+            RP.resolution = 512;
+            rpo = true;
         }
     }
 }
